@@ -10,6 +10,7 @@ d5<-read.csv("D5.csv", header = TRUE, sep = ",")
 d6<-read.csv("D6.csv", header = TRUE, sep = ",")
 d7<-read.csv("D7.csv", header = TRUE, sep = ",")
 d8<-read.csv("D8.csv", header = TRUE, sep = ",")
+d9<-read.csv("D9.csv", header = TRUE, sep = ",")
 
 car_data <- list (d1, d2, d3, d4, d5, d6, d7, d8)
 
@@ -126,9 +127,18 @@ colnames(last)<-c("Final_Node_Activation", "Cue_number")
  
  
  
+noc<-model(d9)
+(noc$iterations[nrow(noc$iterations),4:19])
+sel<-(noc$iterations[nrow(noc$iterations),16:19])
+sel<-t(sel)
+sel<-data.frame(sel)
+sel$new_column<-c("Hatsdun", "Kaiwa", "Dasuka", "Nabusi")
+colnames(sel)<-c("final_activation", "car" )
 
- 
-
+ggplot(sel, aes(x = car, y = final_activation)) +
+  geom_bar(stat = "identity", fill = "steelblue") +  # Create the bar plot
+  labs(x = "Car", y = "Activation Level", title = "Car Activation Levels") +
+  theme_minimal() 
  
  
  
